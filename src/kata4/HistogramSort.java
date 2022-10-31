@@ -6,27 +6,35 @@ import java.util.TreeMap;
 
 public class HistogramSort<T> implements Histogram {
     Histogram histogram;
-    private Map<T, Integer> map = new TreeMap<T, Integer>();
+    private Map<Integer, T> map = new TreeMap<Integer, T>();
+    private Map<T, Integer> mapOG;
     
     public HistogramSort(Histogram histogram){
         this.histogram = histogram;
-        map = histogram.getMap();
+        this.mapOG = histogram.getMap();
+        
+        for (T key : mapOG.keySet()) {
+            this.map.put(this.mapOG.get(key), key);
+        }
         
     }
 
     @Override
     public Map getMap() {
-        return this.map;
+        return this.mapOG;
     }
 
     @Override
     public Integer get(Object key) {
-        return this.map.get(key);
+        return mapOG.get(key);
     }
 
     @Override
     public Set keySet() {
-        return this.map.keySet();
+        return this.mapOG.keySet();
     }
     
+    public Object getSort(Integer key) {
+        return this.map.get(key);
+    }
 }
