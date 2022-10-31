@@ -1,6 +1,6 @@
 package kata4;
 
-import kata4.Histogram;
+import kata4.HistogramCreator;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
@@ -10,11 +10,11 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.ApplicationFrame;
 
-public class HistogramDisplay extends ApplicationFrame{
+public class HistogramDisplay  extends ApplicationFrame{
     
-    private Histogram<String> histogram;
+    private Histogram histogram;
 
-    public HistogramDisplay(String title, Histogram<String> histogram) {
+    public HistogramDisplay(String title, Histogram histogram) {
         super(title);
         this.histogram = histogram;
         
@@ -42,8 +42,8 @@ public class HistogramDisplay extends ApplicationFrame{
     private DefaultCategoryDataset createDataSet() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         
-        for (String key : this.histogram.keySet()) {
-            dataset.addValue(this.histogram.get(key), "", key);
+        for (Object key : this.histogram.keySet()) {
+            dataset.addValue(this.histogram.get(key), "", (String)key);
         }
         
         return dataset;
